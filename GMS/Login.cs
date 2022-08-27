@@ -22,11 +22,7 @@ namespace GMS
             this.Da = new DataAccess();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-        bool isValidToLogin()
+        bool IsValidToLogin()
         {
             if (String.IsNullOrEmpty(this.txtUserName.Text) || String.IsNullOrWhiteSpace(this.txtUserName.Text) ||
                 String.IsNullOrEmpty(this.txtPassword.Text) || String.IsNullOrWhiteSpace(this.txtPassword.Text))
@@ -38,7 +34,7 @@ namespace GMS
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (!this.isValidToLogin())
+            if (!this.IsValidToLogin())
             {
                 MessageBox.Show("Please fill the informations");
                 return;
@@ -60,17 +56,17 @@ namespace GMS
                         if (ds.Tables[0].Rows[index][6].ToString() == "Manager")
                         {
                             this.Hide();
-                            var username = ds.Tables[0].Rows[index]["UserName"].ToString();
+                            var Username = ds.Tables[0].Rows[index]["UserName"].ToString();
                             var UserId = ds.Tables[0].Rows[index]["Id"].ToString();
-                            Home manager = new Home(username,UserId);
+                            Home manager = new Home(Username,UserId);
                             manager.Show();
                         }
                         else
                         {
                             this.Hide();
-                            var username = ds.Tables[0].Rows[index]["UserName"].ToString();
+                            var Username = ds.Tables[0].Rows[index]["UserName"].ToString();
                             var UserId = ds.Tables[0].Rows[index]["Id"].ToString();
-                            EmployeeDash empdash = new EmployeeDash(username, UserId);
+                            EmployeeDash empdash = new EmployeeDash(Username, UserId);
                             empdash.Show();
                         }
 

@@ -21,10 +21,10 @@ namespace GMS
             da = new DataAccess();
             ds = new DataSet();
         }
-        private string userId;
+        private string UserId;
         public Settings(string userId)
         {
-            this.userId = userId;
+            this.UserId = UserId;
             InitializeComponent();
             da = new DataAccess();
             ds = new DataSet();
@@ -54,7 +54,7 @@ namespace GMS
             DialogResult dialogResult = MessageBox.Show("Do you want to update your informations?", "Update?", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                ds = da.ExecuteQuery("UPDATE [GroceryMSdb].[dbo].[User] SET UserName = '" + UserName + "', Name = '" + Name + "', Password = '" + Password + "' WHERE Id = '" + userId + "';");
+                ds = da.ExecuteQuery("UPDATE [GroceryMSdb].[dbo].[User] SET UserName = '" + UserName + "', Name = '" + Name + "', Password = '" + Password + "' WHERE Id = '" + UserId + "';");
                 txtName.Clear();
                 txtPassword.Clear();
                 txtUserName.Clear();
