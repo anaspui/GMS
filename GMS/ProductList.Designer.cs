@@ -339,7 +339,7 @@
             this.chkProdID.TabIndex = 33;
             this.chkProdID.Text = "Product ID";
             this.chkProdID.UseVisualStyleBackColor = false;
-            this.chkProdID.CheckedChanged += new System.EventHandler(this.chkProdID_CheckedChanged);
+            this.chkProdID.CheckedChanged += new System.EventHandler(this.ChkProdID_CheckedChanged);
             // 
             // panel4
             // 

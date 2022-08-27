@@ -26,10 +26,7 @@ namespace GMS
 
         }
 
-        private void EmployeeList_Load(object sender, EventArgs e)
-        {
 
-        }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -96,6 +93,7 @@ namespace GMS
             newId = "u-" + (++temp).ToString("d3");
             return newId;
         }
+        //check
         private bool IsValidToSaveData()
         {
             if (String.IsNullOrEmpty(this.txtName.Text) || String.IsNullOrEmpty(this.txtPassword.Text) ||

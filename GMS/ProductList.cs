@@ -15,7 +15,7 @@ namespace GMS
     {
         private DataAccess da { get; set; }
         private DataSet ds { get; set; }
-        private string username;
+        private string Username;
         public ProductList()
         {
             InitializeComponent();
@@ -29,10 +29,10 @@ namespace GMS
             lblDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
 
         }
-        public ProductList(string username)
+        public ProductList(string Username)
         {
             InitializeComponent();
-            this.username = username;
+            this.Username = Username;
             da = new DataAccess();
             ds = new DataSet();
             var sql = "select * from [GroceryMSdb].[dbo].[ProductList] order by ProdId asc;";
@@ -184,7 +184,7 @@ namespace GMS
                 return true;
         }
 
-        private void chkProdID_CheckedChanged(object sender, EventArgs e)
+        private void ChkProdID_CheckedChanged(object sender, EventArgs e)
         {
             txtProdId.Enabled = false;
             if (chkProdID.Checked)

@@ -24,7 +24,7 @@ namespace GMS
             ds = da.ExecuteQuery(sql);
             this.dgvReport.DataSource = ds.Tables[0];
         }
-        private void refresh()
+        private void Refresh()
         {
             da = new DataAccess();
             ds = new DataSet();
@@ -46,7 +46,7 @@ namespace GMS
 
         private void btnRefresh_Click_1(object sender, EventArgs e)
         {
-            refresh();
+            Refresh();
         }
     }
 }
