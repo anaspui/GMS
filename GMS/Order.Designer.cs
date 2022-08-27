@@ -62,6 +62,8 @@
             this.SelProdQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SelProdPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtQuantity = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdList)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNumUpDown)).BeginInit();
@@ -257,6 +259,11 @@
             this.txtNumUpDown.Name = "txtNumUpDown";
             this.txtNumUpDown.Size = new System.Drawing.Size(135, 22);
             this.txtNumUpDown.TabIndex = 5;
+            this.txtNumUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label3
             // 
@@ -349,6 +356,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtQuantity);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.lblTotal);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.dgvSelProd);
@@ -432,6 +441,24 @@
             this.panel4.Size = new System.Drawing.Size(906, 201);
             this.panel4.TabIndex = 10;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(577, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 16);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Quantities";
+            // 
+            // txtQuantity
+            // 
+            this.txtQuantity.AutoSize = true;
+            this.txtQuantity.Location = new System.Drawing.Point(605, 63);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.Size = new System.Drawing.Size(15, 16);
+            this.txtQuantity.TabIndex = 13;
+            this.txtQuantity.Text = "0";
+            // 
             // Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -506,5 +533,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SelProdPrice;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label txtQuantity;
+        private System.Windows.Forms.Label label1;
     }
 }
