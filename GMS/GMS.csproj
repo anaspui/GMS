@@ -212,5 +212,8 @@
   <ItemGroup>
     <None Include="Resources\dashboard.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="GroceryMSdb.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
