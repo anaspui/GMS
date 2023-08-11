@@ -43,7 +43,7 @@ namespace GroceryManagementSystem
 
         public DataAccess()
         {
-            this.SqlCon = new SqlConnection("Data Source=THE-BUG;Initial Catalog=GroceryMSdb;User ID=sa;Password=anasomar12");
+            this.SqlCon = new SqlConnection("Data Source=THE-BUG\\SQLEXPRESS;Initial Catalog=GroceryMSdb;Persist Security Info=True;User ID=anas;Password=sa");
             SqlCon.Open();
         }
 

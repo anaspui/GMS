@@ -53,7 +53,7 @@ namespace GMS
                     {
                         //MessageBox.Show("Login Confirmed");
                         flag = true;
-                        if (ds.Tables[0].Rows[index][6].ToString() == "Manager")
+                        if (ds.Tables[0].Rows[index][4].ToString() == "Manager")
                         {
                             this.Hide();
                             var Username = ds.Tables[0].Rows[index]["UserName"].ToString();

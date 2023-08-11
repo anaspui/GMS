@@ -22,12 +22,11 @@ namespace GMS
             InitializeComponent();
             da = new DataAccess();
             ds = new DataSet();
+            prevQtyOfSelProd = new DataSet();  // Initialize the DataSet
             Refresh();
             CusIdGen();
             OrderIdGen();
             dvgSelProdListRefresh();
-            //dgvProdList.RowsDefaultCellStyle.ForeColor = Color.Black;
-           // dgvSelProd.RowsDefaultCellStyle.ForeColor = Color.Black;
         }
         public Order(string UserId)
         {
@@ -167,73 +166,47 @@ namespace GMS
         }
         DataSet prevQtyOfSelProd;
         private void btnCheckOut_Click(object sender, EventArgs e)
+{
+    ds = da.ExecuteQuery("Select ProdId from ProductList where ProdId = '" + dgvProdList.SelectedRows[2].ToString() + "'");
+    if (Int32.Parse(txtNumUpDown.Value.ToString()) < Int32.Parse(ds.Tables[0].Rows[0][0].ToString())) {
+        DialogResult dialogResult = MessageBox.Show("Do you want to confirm this purchase?", "Confirm Purchase?", MessageBoxButtons.YesNo);
+        if (dialogResult == DialogResult.Yes)
         {
-            
-            ds = da.ExecuteQuery("Select ProdId from ProductList where ProdId = '" + dgvProdList.SelectedRows[2].ToString() + "'");
-            if (Int32.Parse(txtNumUpDown.ToString()) < Int32.Parse(ds.Tables[0].Rows[0][0].ToString())) {
-                DialogResult dialogResult = MessageBox.Show("Do you want to confirm this purchase?", "Confirm Purchase?", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    var OrderID = OrderIdGen();
-                    var CusID = CusIdGen();
-                    var CusName = txtCusName.Text;
-                    var Phone = txtCusPhn.Text;
-                    ds = da.ExecuteQuery("select * from SelectedProducts;");
-                    double TotalPrice = 0;
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    {
-                        TotalPrice = TotalPrice + double.Parse(ds.Tables[0].Rows[i]["SelProdPrice"].ToString());
-                    }
-                    da.ExecuteQuery("insert into [GroceryMSdb].[dbo].[Order] (OrderId, CusId, EmpId, DateSold, TotalPrice, CusName) values ('" + OrderID + "','" + CusID + "','" + UserId + "', '" + DateTime.Now.ToString("MM/dd/yyyy") + "', " + TotalPrice + ", '" + CusName + "');");
-                    da.ExecuteQuery("insert into Customer(CusId, CusName, OrderId, CusPhone) values ('" + CusID + "', '" + CusName + "', '" + OrderID + "', '" + Phone + "');");
-                    da.ExecuteQuery("delete from SelectedProducts;");
-                    txtCusPhn.Clear();
-                    txtCusName.Clear();
-                    lblTotal.Text = "0.00";
-                    txtNumUpDown.Value = 1;
-                    CusIdGen();
-                    OrderIdGen();
-                    dvgSelProdListRefresh();
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    MessageBox.Show("Purchase Cancelled", "Cancelled",
-                    MessageBoxButtons.OK);
-                }
-                else
-                {
-                    MessageBox.Show("An Unexpected Error Occured", "Purchase Failed",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
+            var OrderID = OrderIdGen();
+            var CusID = CusIdGen();
+            var CusName = txtCusName.Text;
+            var Phone = txtCusPhn.Text;
+            ds = da.ExecuteQuery("select * from SelectedProducts;");
+            double TotalPrice = 0;
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                MessageBox.Show("Please Select Quantity by considering stuffs available on Stock");
+                TotalPrice = TotalPrice + double.Parse(ds.Tables[0].Rows[i]["SelProdPrice"].ToString());
             }
-
-            /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////Prev test
-            //sel qty
-            var sql10 = "select SelProdQty from [GroceryMSdb].[dbo].[SelectedProducts] order by SelProdId;";
-            DataSet ds10 = da.ExecuteQuery(sql10);
-            //selected products qty by id
-            var sql11 = "select SelProdId from [GroceryMSdb].[dbo].[SelectedProducts] order by SelProdId;";
-            DataSet ds11 = da.ExecuteQuery(sql11);
-            //prev qty
-           
-            for (int i = 0; i < ds11.Tables[0].Rows.Count; i++)
-            {
-                var sql12 = "select ProdQty from [GroceryMSdb].[dbo].[ProductList] where ProdId = '" + ds11.Tables[0].Rows[i][0].ToString() + "' order by ProdId;";
-                prevQtyOfSelProd.Tables[0].Rows[i][0] = da.ExecuteQuery(sql12);
-                
-            }
-            for(int i = 0; i < ds11.Tables[0].Rows.Count; i++)
-            {
-                int p = Int32.Parse(prevQtyOfSelProd.Tables[0].Rows[i][0].ToString());
-                int s = Int32.Parse(ds10.Tables[0].Rows[i][0].ToString());
-                var sql = "UPDATE ProductList SET ProdQty = " + (p-s) + " where ProdId = '" + ds11.Tables[0].Rows[i][0].ToString() +"';";
-                da.ExecuteQuery(sql);
-            }*/     
+            da.ExecuteQuery("insert into [GroceryMSdb].[dbo].[Order] (OrderId, CusId, EmpId, DateSold, TotalPrice, CusName) values ('" + OrderID + "','" + CusID + "','" + UserId + "', '" + DateTime.Now.ToString("MM/dd/yyyy") + "', " + TotalPrice + ", '" + CusName + "');");
+            da.ExecuteQuery("insert into Customer(CusId, CusName, OrderId, CusPhone) values ('" + CusID + "', '" + CusName + "', '" + OrderID + "', '" + Phone + "');");
+            da.ExecuteQuery("delete from SelectedProducts;");
+            txtCusPhn.Clear();
+            txtCusName.Clear();
+            lblTotal.Text = "0.00";
+            txtNumUpDown.Value = 1;
+            CusIdGen();
+            OrderIdGen();
+            dvgSelProdListRefresh();
         }
+        else if (dialogResult == DialogResult.No)
+        {
+            MessageBox.Show("Purchase Cancelled", "Cancelled", MessageBoxButtons.OK);
+        }
+        else
+        {
+            MessageBox.Show("An Unexpected Error Occured", "Purchase Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    else
+    {
+        MessageBox.Show("Please Select Quantity by considering stuffs available on Stock");
+    }
+}
 
         private void label5_Click(object sender, EventArgs e)
         {
